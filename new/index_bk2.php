@@ -7,6 +7,7 @@
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content="10" />
     <title>SYNERGY</title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -51,17 +52,14 @@ function check_connect($id_user){
     $sql =  "select * from tb_web_monitor_b where id_user = $id_user  order by id DESC";
 		$result = $conn->query($sql); 
    		if ($result->num_rows > 0) {	  
-            $row = $result->fetch_assoc();
-            $l_date = $row['date_log'];
+         $row = $result->fetch_assoc();
+         $l_date = $row['date_log'];
 	 		//$total =mysqli_num_rows($result);
-            //$ci = substr($l_date,-2,2);
-            // echo $l_date;
+       $ci = substr($l_date,-2,2);
+      // echo $l_date;
 		}
 
-$tm = date("H:i:s");
-$year = date("Y")+543;
-$time = date("d/m")."/".$year." ".$tm;
-
+$time = date('d/m/Y h:i:sa');
 $time_log = explode(" ",$time); 
 $tm_time = explode(":",$time_log[1]);
 $tm_day = explode("/",$time_log[0]);
@@ -70,9 +68,9 @@ $m = $tm_day[1];
 $y = $tm_day[2];
 $hour = $tm_time[0];
 $min = $tm_time[1];
-// $cs = substr($time,-2,2);
+ $cs = substr($time,-2,2);
 $t_log = explode(" ",$l_date); 
-$t_time = explode(":",$t_log[1]);
+$t_time = explode(":",$t_log[2]);
 $ts_day = explode("/",$t_log[0]);
 $t_day = $ts_day[0];
 $t_m = $ts_day[1];
@@ -119,7 +117,6 @@ $sql1 =  "SELECT * FROM  `tb_machine`  WHERE  `id_user` ='$id_user' ";
 			$name1 = $row1['name']; 
 			$mac = $row1['mac_no'];
 			$loca = $row1['location']; 
-            $model = $row1['model']; 
 		}
 
 
@@ -176,7 +173,6 @@ font-size: 16px;">  <a href="logout.php" class="btn btn-danger square-btn-adjust
                     <font color ="#FFFFFF">Name : <?php echo $name1; ?> </font> <br>
                     <font color ="#FFFFFF">Number : <?php echo $mac; ?> </font> <br> 
                     <font color ="#FFFFFF">Location : <?php echo $loca; ?> </font><br>
-                    <font color ="#FFFFFF">Model : <?php echo $model; ?> </font><br>
 					</li>
 				
 					
@@ -341,19 +337,16 @@ $sql =  "SELECT * FROM  `tb_msg_show`  WHERE  `id_user` ='$id_user' and data_gro
 for($i=0;$i<=6;$i++){
    $tdate = ($d-(6-$i))."/".$m."/".date('Y');
     //echo $tdate;
-    $sql = "SELECT  *  FROM `tb_web_monitor_b` where id_user = $id_user ";
-    $resultArray = array();
+    $sql = "SELECT  *  FROM `tb_web_monitor_b` where id_user = $id_user  and LEFT(date_log,10) ='$tdate' order  by id desc ";
     $result = $conn->query($sql); 
    		if ($result->num_rows > 0) {	  
-	  		$rowss = $result->fetch_assoc();
-	  		//$pr[$i] = $rowss['ch3'];
-
-             
-
-            
+	  		$row = $result->fetch_assoc();
+	  		$pr[$i] = $row['ch3'];
+              //echo $pr[$i];
 		}
-      $mydata_j =  json_encode($rowss);
-      echo $mydata_j;
+        //echo $pr[6];
+    //$tdate ="";
+    //echo $pr[$i]."/";
 }
 ?>
 
