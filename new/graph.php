@@ -58,7 +58,7 @@
     }
 
 ?>
-<script type='text/javascript' src="chart.js"></script>
+<script type='text/javascript' src="graph.js"></script>
 <script>
     var day = <?php echo json_encode($day) ?>;
     drawChart(day, "chart1", "ch3", "pressure day")
