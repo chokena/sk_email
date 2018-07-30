@@ -1,7 +1,6 @@
-<canvas id="ch1"></canvas>
-<canvas id="ch2"></canvas>
-<canvas id="ch3"></canvas>
-
+<canvas id="chart1"></canvas>
+<canvas id="chart2"></canvas>
+<canvas id="chart3"></canvas>
 <script src="assets/js/jquery-1.10.2.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.metisMenu.js"></script>
@@ -21,7 +20,6 @@
 <?php 
     date_default_timezone_set("Asia/Bangkok");
     include "../connect.php";
-
     $m = date('m');
     $y = date('Y')+543;
     $d = date('d');
@@ -30,49 +28,42 @@
     $tdate = "25"."/".$m."/".date('Y');
     $sql = "SELECT * FROM tb_web_monitor_b where id_user = 5 and LEFT(date_log,10) ='$tdate' ";
     $result = $conn->query($sql);
-    $results = array();
+    $day = array();
     if ($result->num_rows > 0) {	  
        while( $row = $result->fetch_assoc()){
-           $results[] = $row;
+           $day[] = $row;
        }
     }
-?>
-
-<script>
-//line
-    var res = <?php echo json_encode($results) ?>;
-    var ch1 = res.map(data => data.ch1);
-    var ch2 = res.map(data => data.ch2);
-    var ch3 = res.map(data => data.ch3);
-    var time = res.map(data => data.date_log);
-    var id1 = document.getElementById("ch1").getContext('2d');
-    var id2 = document.getElementById("ch2").getContext('2d');
-    var id3 = document.getElementById("ch3").getContext('2d');
-
-    function drawChart (id, labels, data) {
-        return new Chart(id, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'labels',
-                        fillColor: "rgba(52, 209, 44, 0.9)",
-                        strokeColor: "rgba(52, 209, 44, 0.9)",
-                        pointColor: "rgba(52, 209, 44, 0.9)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(52, 209, 44, 0.9)",
-                        data: data
-                    }
-                ]
-            },
-            options: {
-                responsive: true
+    $week = array();
+    for($i=0;$i<=6;$i++){
+        $tdate = ($d-(6-$i))."/".$m."/".date('Y');
+        $sql = "SELECT  *  FROM `tb_web_monitor_b` where id_user = 5  and LEFT(date_log,10) ='$tdate'";
+        $result = $conn->query($sql); 
+        if ($result->num_rows > 0) {
+            while( $row = $result->fetch_assoc()){
+                $week[] = $row;
             }
-            });
-    }   
-    drawChart(id1, time, ch1);
-    drawChart(id2, time, ch2);
-    drawChart(id3, time, ch3);
+        }
+    }
+    $month = array();
+    for($i=0;$i<=30;$i++){
+        $tdate = ($d-(30-$i))."/".$m."/".date('Y');
+        $sql = "SELECT  *  FROM `tb_web_monitor_b` where id_user = 5  and LEFT(date_log,10) ='$tdate'";
+        $result = $conn->query($sql); 
+        if ($result->num_rows > 0) {
+            while( $row = $result->fetch_assoc()){
+                $month[] = $row;
+            }
+        }
+    }
+
+?>
+<script type='text/javascript' src="chart.js"></script>
+<script>
+    var day = <?php echo json_encode($day) ?>;
+    drawChart(day, "chart1", "ch3", "pressure day")
+    var week = <?php echo json_encode($week) ?>; 
+    drawChart(week, "chart2", "ch3", "pressure week")
+    var month = <?php echo json_encode($month) ?>; 
+    drawChart(month, "chart3", "ch3", "pressure month")
 </script>

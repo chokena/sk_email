@@ -42,7 +42,9 @@ if($chk!= "admin"){
     ?>
     
     <option value="<? echo  $row['id_user']; ?>"><?php echo $row['user']."  ID:".$row['id_user'];   ?></option> 
-    <?php } } ?>
+    <?php } ?>
+  <?php } ?>
+
 </select>
 
  </td >
@@ -119,7 +121,7 @@ if($chk!= "admin"){
   </tr>
   <tr>
     <td bgcolor="#F4F5D8"><center>
-     <font color="#C4C4C4"> Developer by: chokena (mini-iot) </font>
+     <font color="#C4C4C4"> Developed by: chokena (mini-iot) </font>
     </center> </td>
   </tr>
 </table>
