@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+.led-gray,
+.led-gray-blink,
+.led-red,
+.led-red-blink,
+.led-orange,
+.led-orange-blink,
+.led-green,
+.led-green-blink,
+.led-yellow,
+.led-yellow-blink,
+.led-blue,
+.led-blue-blink {
+  margin: 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.led-gray,
+.led-gray-blink {
+  background-color: #aab2bd;
+  box-shadow: #aab2bd 0 -1px 6px 1px, inset #656d78 0 -1px 8px, #656d78 0 1px 6px;
+}
+
+.led-red,
+.led-red-blink {
+  background-color: #F00;
+  box-shadow: #7D7B80 0 -1px 6px 1px, inset #600 0 -1px 8px, #F00 0 3px 11px;
+}
+
+.led-orange,
+.led-orange-blink {
+  background-color: #FF7000;
