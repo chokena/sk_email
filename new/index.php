@@ -22,14 +22,15 @@
 </head>
 <body>
 <?php
+date_default_timezone_set("Asia/Bangkok");
 $chk = $_SESSION["encap"]; 
 if( $chk!= "user"  ){
-		
 	echo '<script type="text/javascript">
-           window.location = "../index.php"
-      </script>';
+        window.location = "../index.php"
+        </script>';
 }
 $id_user = $_GET['id_user'];
+echo $id_user;
 include "../connect.php";
 $sql = "select * from  db_log_error where id_user = $id_user"; 
 $result = $conn->query($sql); 

@@ -2,8 +2,8 @@
 
 $servername = "localhost";
 $username = "root";       // miniiotc_email
-$password = "itsuphan";  //itsuphan
-$dbname = "db_alram";    // miniiotc_email
+$password = "password";  //itsuphan
+$dbname = "synergy";    // miniiotc_email
 
 
 // Create connection

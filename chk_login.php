@@ -21,13 +21,12 @@ if ($result->num_rows > 0) {
   $chk	=  $row['encap']; 
   $user   =  $row['user'];  	
   $_SESSION["encap"] = $chk;
-  //echo $chk; 
 }
 else {
- echo "<script> alert('USER และ Password ไม่ถูกต้อง'); </script>";	
-echo '<script type="text/javascript">
+      echo "<script> alert('USER และ Password ไม่ถูกต้อง'); </script>";	
+      echo '<script type="text/javascript">
            window.location = "index.php"
-      </script>';	
+            </script>';	
 	
 
 }
@@ -35,17 +34,16 @@ echo '<script type="text/javascript">
 if($chk == "admin") {
 	$_SESSION["encap"] = "admin";
 	echo '<script type="text/javascript">
-           window.location = "madmin.php"
-      </script>';	
+            window.location = "madmin.php"
+            </script>';	
 	  
 	 
 }
 else {
-	 $_SESSION["encap"] = "user";
-  echo '<script type="text/javascript">
-           window.location = "new/index.php?id_user='.$iduser.'";
-      </script>';	
-	   
+      $_SESSION["encap"] = "user";
+      echo '<script type="text/javascript">
+            window.location = "new/index.php?id_user='.$iduser.'";
+            </script>';	
 }
 
 ?>
